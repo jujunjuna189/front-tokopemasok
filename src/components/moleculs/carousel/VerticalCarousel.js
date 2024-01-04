@@ -14,7 +14,7 @@ const VerticalCarousel = (props) => {
     }
 
     const position = (position) => {
-        refCarousel.current.scrollTop = countDimension()[position];
+        (refCarousel.current || {}).scrollTop = countDimension()[position];
     }
 
     const main = () => {

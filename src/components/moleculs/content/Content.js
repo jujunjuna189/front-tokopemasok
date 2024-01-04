@@ -12,6 +12,7 @@ const Content = (props) => {
                 <div className="flex justify-center">
                     <div className={`${props.padding !== false && 'px-3'} min-h-[78.5vh] w-full max-w-[31.25rem] pb-16 relative ${props.jumbotron && 'mt-[-14.5rem]'}`}>
                         {props.children}
+                        {props.element && props.element}
                     </div>
                 </div>
             </div>

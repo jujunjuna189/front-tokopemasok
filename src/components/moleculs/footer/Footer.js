@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { RouteName } from "../../../router/RouteName";
 
 const Footer = (props) => {
     const navigation = useNavigate();
@@ -6,10 +7,10 @@ const Footer = (props) => {
 
     return (
         <div className="flex justify-center z-10">
-            <div className="w-full max-w-[31.25rem] shadow-all px-3 py-1 fixed bottom-0 bg-white">
+            <div className="w-full max-w-[31.25rem] shadow-all px-3 py-[0.65rem] fixed bottom-0 bg-white">
                 <div className="flex justify-around">
-                    <div className="leading-4 cursor-pointer" onClick={() => navigation('/')}>
-                        <div className={`flex justify-center ${location.pathname === '/' && 'text-cyan-700'}`}>
+                    <div className="leading-4 cursor-pointer" onClick={() => navigation(RouteName.MAIN)}>
+                        <div className={`flex justify-center ${location.pathname === RouteName.MAIN && 'text-cyan-700'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
@@ -18,18 +19,6 @@ const Footer = (props) => {
                             </svg>
                         </div>
                         <span className="text-[11px] font-medium">Home</span>
-                    </div>
-                    <div className="leading-4 cursor-pointer" onClick={() => navigation('/profile')}>
-                        <div className={`flex justify-center ${location.pathname === '/profile' && 'text-cyan-700'}`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                <path d="M17 17h-11v-14h-2"></path>
-                                <path d="M6 5l14 1l-1 7h-13"></path>
-                            </svg>
-                        </div>
-                        <span className="text-[11px] font-medium">Keranjang</span>
                     </div>
                     <div className="leading-4 cursor-pointer" onClick={() => navigation('/chat-contact')}>
                         <div className="flex justify-center">

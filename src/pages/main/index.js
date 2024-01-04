@@ -1,10 +1,11 @@
 import { AssetBannerBawah, AssetBannerBawah2, AssetBusinessPackage, IcReward } from "../../assets";
 import { Button, Card, Content, SimpleCarousel, VerticalCarousel } from "../../components";
 import { UseMainContext } from "../../contexts/main";
+import { RouteName } from "../../router/RouteName";
 import { formatterCurrency } from "../../utils";
 
 const MainPage = () => {
-    const { carousel, carouselText, packages, list } = UseMainContext();
+    const { navigation, carousel, carouselText, packages, list } = UseMainContext();
 
     return (
         <Content padding={false}>
@@ -195,7 +196,7 @@ const MainPage = () => {
                                         </div>
                                     </div>
                                     <div className="mt-2">
-                                        <Button className="bg-cyan-700 text-white py-[0.5rem]">Pesan Sekarang</Button>
+                                        <Button className="bg-cyan-700 text-white py-[0.5rem]" onClick={() => navigation(`${RouteName.CATALOG_DETAIL}/${item.id}`)}>Pesan Sekarang</Button>
                                     </div>
                                 </Card>
                             );

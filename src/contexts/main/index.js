@@ -1,9 +1,12 @@
-import { createContext, useContext } from "react"
-import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome, AssetProductPackage1, AssetProductPackage2, AssetProductPackage3, AssetProductPackage4, AssetProductProduct1, AssetProductProduct2, AssetProductProduct3, AssetProductProduct4, AssetProductProduct5 } from "../../assets";
+import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome, AssetProductPackage1, AssetProductPackage2, AssetProductPackage3, AssetProductPackage4 } from "../../assets";
+import { getProductRepo } from "../../repo";
 
 const MainContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
+    const navigation = useNavigate();
     const carousel = [
         {
             title: 'Selamat datang di tokopemasok',
@@ -91,59 +94,21 @@ export const MainContextProvider = ({ children }) => {
         ],
     }
 
-    const list = [
-        {
-            id: 1,
-            title: 'Ayam Kampung Jago /Kg',
-            price: 50000,
-            status: 'Tersedia',
-            sell: '+380',
-            path: AssetProductProduct1,
-        },
-        {
-            id: 2,
-            title: 'Ayam Broiler /Kg',
-            price: 28000,
-            status: 'Tersedia',
-            sell: '+290',
-            path: AssetProductProduct2,
-        },
-        {
-            id: 3,
-            title: 'Ayam Pejantan /Kg',
-            price: 25000,
-            status: 'Tersedia',
-            sell: '+330',
-            path: AssetProductProduct3,
-        },
-        {
-            id: 4,
-            title: 'Ayam Kampung Betina /Kg',
-            price: 26000,
-            status: 'Tersedia',
-            sell: '+390',
-            path: AssetProductProduct4,
-        },
-        {
-            id: 5,
-            title: 'Ayam Petelur /Kg',
-            price: 34000,
-            status: 'Tersedia',
-            sell: '+550',
-            path: AssetProductProduct5,
-        },
-        {
-            id: 6,
-            title: 'Judul Produk',
-            price: 5000000,
-            status: 'Tersedia',
-            sell: '+460',
-            path: '',
-        },
-    ];
+    const [list, setList] = useState([]);
+
+    const onGetProduct = async () => {
+        await getProductRepo().then((res) => {
+            setList(res);
+        });
+    }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        onGetProduct();
+    }, []);
 
     return (
-        <MainContext.Provider value={{ carousel, carouselText, packages, list }}>
+        <MainContext.Provider value={{ navigation, carousel, carouselText, packages, list }}>
             {children}
         </MainContext.Provider>
     );

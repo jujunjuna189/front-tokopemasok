@@ -15,7 +15,7 @@ const SimpleCarousel = (props) => {
     }
 
     const position = (position) => {
-        refCarousel.current.scrollLeft = countDimension()[position];
+        (refCarousel.current || {}).scrollLeft = countDimension()[position];
     }
 
     const onScroll = (e) => {
