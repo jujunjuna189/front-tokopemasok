@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome, AssetProductPackage1, AssetProductPackage2, AssetProductPackage3, AssetProductPackage4 } from "../../assets";
-import { getProductRepo } from "../../repo";
+import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome } from "../../assets";
+import { getCartRepo, getProductRepo } from "../../repo";
 
 const MainContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
     const navigation = useNavigate();
+    const [cart, setCart] = useState({});
     const carousel = [
         {
             title: 'Selamat datang di tokopemasok',
@@ -28,7 +29,7 @@ export const MainContextProvider = ({ children }) => {
 
     const carouselText = [
         {
-            title: 'Spesial Pernikahan',
+            title: 'Paket Pernikahan',
             subTitle: 'Pikiran tentram dompet aman',
         },
         {
@@ -45,70 +46,28 @@ export const MainContextProvider = ({ children }) => {
         },
     ];
 
-    const packages = {
-        event: [
-            {
-                id: 1,
-                title: 'Paket Hemat',
-                subTitle: '20kg (Ayam) & 5kg (Ikan)',
-                price: 500000,
-                path: AssetProductPackage1,
-            },
-            {
-                id: 2,
-                title: 'Paket Premium',
-                subTitle: '20kg (Ayam) & 15kg (Ikan)',
-                price: 1100000,
-                path: AssetProductPackage2,
-            },
-            {
-                id: 3,
-                title: 'Paket Mewah',
-                subTitle: '50kg (Ayam) & 20kg (Ikan)',
-                price: 2500000,
-                path: AssetProductPackage3,
-            },
-        ],
-        wedding: [
-            {
-                id: 1,
-                title: 'Paket Hemat',
-                subTitle: '20kg (Ayam) & 5kg (Ikan)',
-                price: 500000,
-                path: AssetProductPackage4,
-            },
-            {
-                id: 2,
-                title: 'Paket Premium',
-                subTitle: '20kg (Ayam) & 15kg (Ikan)',
-                price: 1100000,
-                path: AssetProductPackage4,
-            },
-            {
-                id: 3,
-                title: 'Paket Mewah',
-                subTitle: '50kg (Ayam) & 20kg (Ikan)',
-                price: 2500000,
-                path: AssetProductPackage4,
-            },
-        ],
-    }
-
     const [list, setList] = useState([]);
 
     const onGetProduct = async () => {
-        await getProductRepo().then((res) => {
+        await getProductRepo({ include: 'include=price' }).then((res) => {
             setList(res);
+        });
+    }
+
+    const onGetCart = async () => {
+        await getCartRepo({ filter: 'filter[status]=active' }).then((res) => {
+            setCart(res);
         });
     }
 
     useEffect(() => {
         window.scrollTo(0, 0);
         onGetProduct();
+        onGetCart();
     }, []);
 
     return (
-        <MainContext.Provider value={{ navigation, carousel, carouselText, packages, list }}>
+        <MainContext.Provider value={{ navigation, carousel, carouselText, list, cart }}>
             {children}
         </MainContext.Provider>
     );

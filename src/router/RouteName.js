@@ -1,4 +1,6 @@
 export const RouteName = {
     MAIN: '/',
-    CATALOG_DETAIL: '/catalog/detail',
+    LOGIN: '/login',
+    REGISTER: '/register',
+    CART: '/cart',
 };
