@@ -8,6 +8,7 @@ import FooterSection from "./footer/FooterSection"
 import Navbar from "./navbar/Navbar"
 import NavbarWithBack from "./navbar/NavbarWithBack"
 import HelpAdmin from "./help/HelpAdmin"
+import NavbarSimple from "./navbar/NavbarSimple"
 
 export {
     Card,
@@ -15,6 +16,7 @@ export {
     CounterButton,
     Navbar,
     NavbarWithBack,
+    NavbarSimple,
     Footer,
     FooterSection,
     SimpleCarousel,

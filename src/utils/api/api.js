@@ -7,3 +7,5 @@ export const API_AUTH_REGISTER = `${REACT_APP_API_URL}/auth/register`;
 export const API_PRODUCT = `${REACT_APP_API_URL}/product`;
 // Cart
 export const API_CART = `${REACT_APP_API_URL}/cart`;
+// Order
+export const API_ORDER = `${REACT_APP_API_URL}/order`;
