@@ -3,7 +3,7 @@ import { UseCartContext } from "../../contexts/cart";
 import { formatterDecimal } from "../../utils";
 
 const CartPage = () => {
-    const { navigation, cart } = UseCartContext();
+    const { navigation, cart, onAddCart, onAddOrder } = UseCartContext();
 
     return (
         <Content navbar={false} footer={false} padding={false}>
@@ -60,7 +60,7 @@ const CartPage = () => {
                                     </div>
                                 </div>
                                 <div className="pb-2">
-                                    <CounterButton value={<span>{item.qty}<span className="font-normal text-[10px]">kg</span></span>} />
+                                    <CounterButton value={<span>{item.qty}<span className="font-normal text-[10px]">kg</span></span>} onPlus={() => onAddCart({ productId: item.product_id, productPriceId: item.product_price_id, qty: (item.qty + item.product_price_model.qty) })} onMin={() => onAddCart({ productId: item.product_id, productPriceId: item.product_price_id, qty: item.qty > 0 ? (item.qty - item.product_price_model.qty) : 0 })} />
                                 </div>
                             </div>
                         );
@@ -83,7 +83,7 @@ const CartPage = () => {
                 </div>
             </div>
             <div className="fixed bottom-0 bg-white py-4 w-full px-2 max-w-[31.25rem]">
-                <Button className="bg-cyan-700 text-white py-[0.5rem] w-full">Pesan dan Antarkan</Button>
+                <Button className="bg-cyan-700 text-white py-[0.5rem] w-full" onClick={() => onAddOrder({ cartId: cart.id })}>Pesan dan Antarkan</Button>
             </div>
         </Content>
     );

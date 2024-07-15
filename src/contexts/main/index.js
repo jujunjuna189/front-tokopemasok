@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome } from "../../assets";
-import { getCartRepo, getProductRepo } from "../../repo";
+import { addCartRepo, getCartRepo, getProductRepo } from "../../repo";
 
 const MainContext = createContext();
 
@@ -60,6 +60,12 @@ export const MainContextProvider = ({ children }) => {
         });
     }
 
+    const onAddCart = async ({ productId, productPriceId }) => {
+        await addCartRepo({ body: { 'product_id': productId, 'product_price_id': productPriceId } }).then((res) => {
+            onGetCart();
+        });
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         onGetProduct();
@@ -67,7 +73,7 @@ export const MainContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <MainContext.Provider value={{ navigation, carousel, carouselText, list, cart }}>
+        <MainContext.Provider value={{ navigation, carousel, carouselText, list, cart, onAddCart }}>
             {children}
         </MainContext.Provider>
     );

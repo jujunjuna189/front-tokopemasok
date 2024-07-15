@@ -5,7 +5,7 @@ import { RouteName } from "../../router/RouteName";
 import { formatterCurrency } from "../../utils";
 
 const MainPage = () => {
-    const { navigation, carousel, carouselText, list, cart } = UseMainContext();
+    const { navigation, carousel, carouselText, list, cart, onAddCart } = UseMainContext();
 
     return (
         <Content padding={false}>
@@ -81,7 +81,7 @@ const MainPage = () => {
                                     </div>
                                     <div className="grow" />
                                     <div className="mt-2">
-                                        <Button className="bg-cyan-700 text-white py-[0.5rem]" onClick={() => { }}>Pesan Sekarang</Button>
+                                        <Button className="bg-cyan-700 text-white py-[0.5rem]" onClick={() => onAddCart({ productId: item.id, productPriceId: item.price.id })}>Pesan Sekarang</Button>
                                     </div>
                                 </Card>
                             );
