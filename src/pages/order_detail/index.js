@@ -1,6 +1,6 @@
-import { ArrowBack, Button, Content, CounterButton, HelpAdmin } from "../../components";
+import { ArrowBack, Button, Content, HelpAdmin } from "../../components";
 import { UseOrderDetailContext } from "../../contexts/order_detail";
-import { formatterDecimal } from "../../utils";
+import { dateFormatterV2, formatterDecimal } from "../../utils";
 
 const OrderDetailPage = () => {
     const { order } = UseOrderDetailContext();
@@ -37,6 +37,19 @@ const OrderDetailPage = () => {
             </div>
             <div className="mt-2 px-3">
                 <span className="font-medium">Informasi Pemesanan</span>
+                <div className="px-2">
+                    {order.order_status_model?.map((item, index) => {
+                        return (
+                            <div className="flex gap-2 items-center my-3">
+                                <div className="border-[3px] border-green-500 rounded-full h-[0.8rem] w-[0.8rem]" />
+                                <div className="flex flex-col leading-3">
+                                    <small>{dateFormatterV2(item.created_at)}</small>
+                                    <span className="font-semibold">{item.description}</span>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <hr className="my-3" />
             <div className="px-3">
@@ -54,7 +67,7 @@ const OrderDetailPage = () => {
                                     </div>
                                 </div>
                                 <div className="pb-2">
-                                    <CounterButton value={<span>{item.qty}<span className="font-normal text-[10px]">kg</span></span>} />
+                                    <span className="px-2 font-semibold text-sm"><span>{item.qty}<span className="font-normal text-[10px]">kg</span></span></span>
                                 </div>
                             </div>
                         );
@@ -76,9 +89,11 @@ const OrderDetailPage = () => {
                     </div>
                 </div>
             </div>
-            <div className="fixed bottom-0 bg-white py-4 w-full px-2 max-w-[31.25rem]">
-                <Button className="bg-cyan-700 text-white py-[0.5rem] w-full">Pesan dan Antarkan</Button>
-            </div>
+            {order.order_status_model?.[0]?.status === 'processed' && (
+                <div className="fixed bottom-0 bg-white py-4 w-full px-2 max-w-[31.25rem]">
+                    <Button className="bg-red-700 text-white py-[0.5rem] w-full">Batalkan Pesanan</Button>
+                </div>
+            )}
         </Content>
     );
 }

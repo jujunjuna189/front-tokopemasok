@@ -26,13 +26,13 @@ const Footer = (props) => {
                         </div>
                     </div>
                     <div className="leading-4 cursor-pointer" onClick={() => navigation(RouteName.ORDER)}>
-                        <div className="flex justify-center">
+                        <div className={`flex justify-center ${location.pathname === RouteName.ORDER && 'text-cyan-700'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12h6" /><path d="M9 16h6" /></svg>
                         </div>
                         <span className="text-[11px] font-medium">Pesanan</span>
                     </div>
                     <div className="leading-4 cursor-pointer" onClick={() => navigation(RouteName.PROFILE)}>
-                        <div className="flex justify-center">
+                        <div className={`flex justify-center ${location.pathname === RouteName.PROFILE && 'text-cyan-700'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" /></svg>
                         </div>
                         <span className="text-[11px] font-medium">Biodata</span>
