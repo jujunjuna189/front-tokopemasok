@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { ModalCartAddress } from "../../pages/cart/component";
 import { addCartRepo, addOrderRepo, getCartRepo } from "../../repo";
 import { RouteName } from "../../router/RouteName";
 
@@ -7,6 +8,7 @@ const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
     const navigation = useNavigate();
+    const [element, setElement] = useState(<></>);
     const [cart, setCart] = useState({});
 
     const onGetCart = async () => {
@@ -29,13 +31,17 @@ export const CartContextProvider = ({ children }) => {
         });
     }
 
+    const onChangeAddress = () => {
+        setElement(<ModalCartAddress />);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         onGetCart();
     }, []);
 
     return (
-        <CartContext.Provider value={{ navigation, cart, onAddCart, onAddOrder }}>
+        <CartContext.Provider value={{ navigation, element, cart, onAddCart, onAddOrder, onChangeAddress }}>
             {children}
         </CartContext.Provider>
     );

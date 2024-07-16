@@ -3,10 +3,10 @@ import { UseCartContext } from "../../contexts/cart";
 import { formatterDecimal } from "../../utils";
 
 const CartPage = () => {
-    const { navigation, cart, onAddCart, onAddOrder } = UseCartContext();
+    const { navigation, element, cart, onAddCart, onAddOrder, onChangeAddress } = UseCartContext();
 
     return (
-        <Content navbar={false} footer={false} padding={false}>
+        <Content navbar={false} footer={false} padding={false} element={element}>
             <div className="py-4 pl-2 flex justify-between sticky top-0 bg-white">
                 <ArrowBack label={'Pesanan'} />
                 <HelpAdmin />
@@ -31,7 +31,7 @@ const CartPage = () => {
                         <span className="font-medium text-sm">{cart.address}</span>
                     </div>
                     <div>
-                        <Button className="border border-cyan-700 text-cyan-700">Ubah</Button>
+                        <Button className="border border-cyan-700 text-cyan-700" onClick={() => onChangeAddress()}>Ubah</Button>
                     </div>
                 </div>
             </div>
