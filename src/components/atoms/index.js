@@ -1,5 +1,6 @@
 import ArrowBack from "./arrow/ArrowBack"
 import Button from "./button/Button"
+import InputArea from "./input/InputArea"
 import InputDate from "./input/InputDate"
 import InputEmail from "./input/InputEmail"
 import InputNumber from "./input/InputNumber"
@@ -18,4 +19,5 @@ export {
     InputRadio,
     InputDate,
     InputNumber,
+    InputArea,
 }

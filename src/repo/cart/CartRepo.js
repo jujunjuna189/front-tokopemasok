@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getLocalToken } from "../../utils";
-import { API_CART, API_CART_ADD } from "../../utils/api/api";
+import { API_CART, API_CART_ADD, API_CART_UPDATE } from "../../utils/api/api";
 
 export const getCartRepo = async ({ include = '', filter = '' }) => {
     var token = getLocalToken();
@@ -20,6 +20,20 @@ export const addCartRepo = async ({ body }) => {
     var token = getLocalToken();
     try {
         const response = await axios.post(API_CART_ADD, body, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+            },
+        });
+        return response.data.data.cart;
+    } catch (error) {
+        return false;
+    }
+}
+
+export const updateCartRepo = async ({ body }) => {
+    var token = getLocalToken();
+    try {
+        const response = await axios.post(API_CART_UPDATE, body, {
             headers: {
                 Authorization: 'Bearer ' + token,
             },

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { ModalCartAddress } from "../../pages/cart/component";
-import { addCartRepo, addOrderRepo, getCartRepo } from "../../repo";
+import { addCartRepo, addOrderRepo, addUserAddressRepo, deleteUserAddressRepo, getCartRepo, getUserAddressRepo, updateCartRepo } from "../../repo";
 import { RouteName } from "../../router/RouteName";
 
 const CartContext = createContext();
@@ -23,6 +23,15 @@ export const CartContextProvider = ({ children }) => {
         });
     }
 
+    const onUpdateCart = async ({ fullAddress }) => {
+        await updateCartRepo({ body: { 'id': cart.id, 'address': fullAddress } }).then((res) => {
+            if (res !== false) {
+                setCart(res);
+                setElement(<></>);
+            }
+        });
+    }
+
     const onAddOrder = async ({ cartId }) => {
         await addOrderRepo({ body: { 'cart_id': cartId } }).then((res) => {
             if (res !== false) {
@@ -31,8 +40,34 @@ export const CartContextProvider = ({ children }) => {
         });
     }
 
-    const onChangeAddress = () => {
-        setElement(<ModalCartAddress />);
+    const onGetUserAddress = async () => {
+        var userAddress = await getUserAddressRepo({}).then((res) => {
+            return res;
+        });
+        return userAddress;
+    }
+
+    const onAddUserAddress = async ({ fullAddress = '' }) => {
+        await addUserAddressRepo({ body: { 'full_address': fullAddress } }).then((res) => {
+            if (res !== false) {
+                onShowModalUserAddress();
+            }
+        });
+    }
+
+    const onDeleteUserAddress = async ({ id = '' }) => {
+        await deleteUserAddressRepo({ body: { 'id': id } }).then((res) => {
+            if (res !== false) {
+                onShowModalUserAddress();
+            }
+        });
+    }
+
+    const onShowModalUserAddress = async () => {
+        // Get address
+        await onGetUserAddress().then((res) => {
+            setElement(<ModalCartAddress userAddress={res} onChangeUserAddress={(res) => onUpdateCart({ fullAddress: res.fullAddress })} onAdd={(res) => onAddUserAddress({ fullAddress: res.fullAddress })} onDelete={(res) => onDeleteUserAddress({ id: res })} onClose={() => setElement(<></>)} />);
+        });
     }
 
     useEffect(() => {
@@ -41,7 +76,7 @@ export const CartContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <CartContext.Provider value={{ navigation, element, cart, onAddCart, onAddOrder, onChangeAddress }}>
+        <CartContext.Provider value={{ navigation, element, cart, onAddCart, onAddOrder, onShowModalUserAddress }}>
             {children}
         </CartContext.Provider>
     );

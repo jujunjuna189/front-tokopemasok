@@ -3,7 +3,7 @@ import { UseCartContext } from "../../contexts/cart";
 import { formatterDecimal } from "../../utils";
 
 const CartPage = () => {
-    const { navigation, element, cart, onAddCart, onAddOrder, onChangeAddress } = UseCartContext();
+    const { navigation, element, cart, onAddCart, onAddOrder, onShowModalUserAddress } = UseCartContext();
 
     return (
         <Content navbar={false} footer={false} padding={false} element={element}>
@@ -31,7 +31,7 @@ const CartPage = () => {
                         <span className="font-medium text-sm">{cart.address}</span>
                     </div>
                     <div>
-                        <Button className="border border-cyan-700 text-cyan-700" onClick={() => onChangeAddress()}>Ubah</Button>
+                        <Button className="border border-cyan-700 text-cyan-700" onClick={() => onShowModalUserAddress()}>Ubah</Button>
                     </div>
                 </div>
             </div>
