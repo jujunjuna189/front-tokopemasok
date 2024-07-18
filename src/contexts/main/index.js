@@ -2,11 +2,14 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome } from "../../assets";
 import { addCartRepo, getCartRepo, getProductRepo } from "../../repo";
+import { getLocalCart, getLocalUser, setLocalCart } from "../../utils";
 
 const MainContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
     const navigation = useNavigate();
+    const user = getLocalUser();
+    const [localCart, setStateLocalCart] = useState(getLocalCart());
     const [cart, setCart] = useState({});
     const carousel = [
         {
@@ -66,14 +69,35 @@ export const MainContextProvider = ({ children }) => {
         });
     }
 
+    // local cart
+    const onAddCartLocal = ({ item = {} }) => {
+        // combine product by id product
+        var cart = getLocalCart() ?? {};
+        var product = cart.cart_product ?? [];
+        var combineIndex = product.findIndex((x) => x.id === item.id);
+        if (combineIndex >= 0) {
+            var combine = product[combineIndex];
+            combine.qty = combine.qty + item.price.qty;
+            combine.sub_total = (combine.qty * item.price.price).toString();
+            product[combineIndex] = { ...item, ...combine };
+        } else {
+            product.push({ ...item, qty: item.price.qty, sub_total: (item.price.qty * item.price.price).toString() });
+        }
+        cart.qty = product.reduce((total, currentValue) => total + currentValue.qty, 0);
+        cart.sub_total = product.reduce((total, currentValue) => total + parseInt(currentValue.sub_total), 0).toString();
+        setLocalCart({ ...cart, cart_product: [...product] });
+        setStateLocalCart({ ...cart, cart_product: [...product] });
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         onGetProduct();
-        onGetCart();
+        user !== null && onGetCart();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <MainContext.Provider value={{ navigation, carousel, carouselText, list, cart, onAddCart }}>
+        <MainContext.Provider value={{ navigation, user, carousel, carouselText, list, localCart, cart, onAddCart, onAddCartLocal }}>
             {children}
         </MainContext.Provider>
     );

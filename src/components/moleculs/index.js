@@ -9,6 +9,7 @@ import Navbar from "./navbar/Navbar"
 import NavbarWithBack from "./navbar/NavbarWithBack"
 import HelpAdmin from "./help/HelpAdmin"
 import NavbarSimple from "./navbar/NavbarSimple"
+import ScreenNoAuth from "./screen/ScreenNoAuth"
 
 export {
     Card,
@@ -22,4 +23,5 @@ export {
     SimpleCarousel,
     VerticalCarousel,
     HelpAdmin,
+    ScreenNoAuth,
 }

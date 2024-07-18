@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { ModalCartAddress } from "../../pages/cart/component";
 import { addCartRepo, addOrderRepo, addUserAddressRepo, deleteUserAddressRepo, getCartRepo, getUserAddressRepo, updateCartRepo } from "../../repo";
 import { RouteName } from "../../router/RouteName";
+import { getLocalUser } from "../../utils";
 
 const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
     const navigation = useNavigate();
+    const user = getLocalUser();
     const [element, setElement] = useState(<></>);
     const [cart, setCart] = useState({});
 
@@ -72,11 +74,12 @@ export const CartContextProvider = ({ children }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        onGetCart();
+        user !== null && onGetCart();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <CartContext.Provider value={{ navigation, element, cart, onAddCart, onAddOrder, onShowModalUserAddress }}>
+        <CartContext.Provider value={{ navigation, element, user, cart, onAddCart, onAddOrder, onShowModalUserAddress }}>
             {children}
         </CartContext.Provider>
     );

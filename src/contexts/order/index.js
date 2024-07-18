@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { getOrderRepo } from "../../repo";
+import { getLocalUser } from "../../utils";
 
 const OrderContext = createContext();
 
 export const OrderContextProvider = ({ children }) => {
     const navigation = useNavigate();
+    const user = getLocalUser();
     const [order, setOrder] = useState([]);
     const [tab, setTab] = useState([
         {
@@ -43,12 +45,12 @@ export const OrderContextProvider = ({ children }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        onChangeTab(0);
+        user !== null && onChangeTab(0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <OrderContext.Provider value={{ navigation, tab, order, onChangeTab }}>
+        <OrderContext.Provider value={{ navigation, tab, user, order, onChangeTab }}>
             {children}
         </OrderContext.Provider>
     );
