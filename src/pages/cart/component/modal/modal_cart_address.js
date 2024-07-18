@@ -49,7 +49,7 @@ const ModalCartAddress = (props) => {
                         );
                     })}
                     <div className="mt-2 flex flex-col">
-                        <span className="font-semibold text-sm">Bandung Padasuka</span>
+                        <span className="font-semibold text-sm">Tambah alamat baru</span>
                         <small>Contoh: (Dusun. Rt/Rw. Desa. Kec. Kab. Prov.) Tambahkan jalan atau patokan agar kurir mudah menemukanmu</small>
                     </div>
                     <div className="mt-1">

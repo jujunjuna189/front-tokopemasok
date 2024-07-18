@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { CartContextProvider } from "./contexts/cart";
+import { CartLocalContextProvider } from "./contexts/cart_local";
 import { LoginContextProvider } from "./contexts/login";
 import { MainContextProvider } from "./contexts/main";
 import { OrderContextProvider } from "./contexts/order";
 import { OrderDetailContextProvider } from "./contexts/order_detail";
 import { ProfileContextProvider } from "./contexts/profile";
 import { RegisterContextProvider } from "./contexts/register";
-import { CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage } from "./pages";
+import { CartLocalPage, CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage } from "./pages";
 import { RouteName } from "./router/RouteName";
 
 function App() {
@@ -31,6 +32,11 @@ function App() {
         <CartContextProvider>
           <CartPage />
         </CartContextProvider>
+      } />
+      <Route path={RouteName.CART_LOCAL} element={
+        <CartLocalContextProvider>
+          <CartLocalPage />
+        </CartLocalContextProvider>
       } />
       <Route path={RouteName.ORDER} element={
         <OrderContextProvider>

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { RouteName } from "../../../router/RouteName";
+import { getLocalCart } from "../../../utils";
 
 const Footer = (props) => {
     const navigation = useNavigate();
@@ -20,7 +21,7 @@ const Footer = (props) => {
                         </div>
                         <span className="text-[11px] font-medium">Beranda</span>
                     </div>
-                    <div className="leading-4 cursor-pointer" onClick={() => navigation(RouteName.CART)}>
+                    <div className="leading-4 cursor-pointer" onClick={() => getLocalCart() != null ? navigation(RouteName.CART_LOCAL) : navigation(RouteName.CART)}>
                         <div className="flex justify-center bg-cyan-700 rounded-full p-[0.40rem] text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg>
                         </div>

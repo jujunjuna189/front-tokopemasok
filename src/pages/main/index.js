@@ -40,7 +40,7 @@ const MainPage = () => {
                     </div>
                     <div className="flex justify-between items-center mt-2">
                         <span className="font-medium text-sm">Tentang Tokopemasok</span>
-                        <Button className="bg-cyan-700 text-white">Telusuri</Button>
+                        <Button className="border border-cyan-700 text-cyan-700">Telusuri</Button>
                     </div>
                 </Card>
             </div>
@@ -104,19 +104,19 @@ const MainPage = () => {
             )}
             {localCart != null && (
                 <div className="fixed bottom-14 py-4 w-full px-2 max-w-[31.25rem]">
-                    <div className="flex justify-between items-center bg-cyan-700 py-2 px-3 rounded-lg text-white shadow-all cursor-pointer" onClick={() => navigation(RouteName.CART)}>
-                        <div className="flex gap-2 items-center">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg>
-                            </span>
-                            <div className="flex flex-col">
+                    <div className="flex flex-col bg-cyan-700 py-2 px-3 rounded-lg text-white shadow-all cursor-pointer" onClick={() => navigation(RouteName.CART_LOCAL)}>
+                        <div className="flex justify-between items-center">
+                            <div className="flex gap-2 items-center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg>
+                                </span>
                                 <span className="font-semibold text-sm">{localCart.qty} Pesanan</span>
-                                <small>Atur pesanan dan mulai pesan via WhatsApp..!</small>
+                            </div>
+                            <div>
+                                <span className="font-semibold text-sm">{formatterCurrency(localCart.sub_total)}</span>
                             </div>
                         </div>
-                        <div>
-                            <span className="font-semibold text-sm">{formatterCurrency(localCart.sub_total)}</span>
-                        </div>
+                        <small>Atur pesanan dan mulai pesan via WhatsApp..!</small>
                     </div>
                 </div>
             )}

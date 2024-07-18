@@ -40,7 +40,7 @@ const CartPage = () => {
                     <div className="border rounded-lg mt-2 py-2 px-3 flex justify-between items-center">
                         <div className="flex flex-col">
                             <span>Alamat Pengantaran</span>
-                            <span className="font-medium text-sm">{cart.address}</span>
+                            <span className="font-medium text-sm">{cart.address ?? 'Silahkan ubah alamat pengantaran anda'}</span>
                         </div>
                         <div>
                             <Button className="border border-cyan-700 text-cyan-700" onClick={() => onShowModalUserAddress()}>Ubah</Button>
@@ -94,6 +94,7 @@ const CartPage = () => {
                         </div>
                     </div>
                 </div>
+                <div className="h-10"></div>
                 <div className="fixed bottom-0 bg-white py-4 w-full px-2 max-w-[31.25rem]">
                     <Button className="bg-cyan-700 text-white py-[0.5rem] w-full" onClick={() => onAddOrder({ cartId: cart.id })}>Pesan dan Antarkan</Button>
                 </div>

@@ -22,7 +22,7 @@ const SimpleCarousel = (props) => {
         clearTimeout(timeOut.current);
 
         timeOut.current = setTimeout(() => {
-            const positionIndex = findClosestValueIndex(countDimension(), refCarousel.current.scrollLeft);
+            const positionIndex = findClosestValueIndex(countDimension(), refCarousel.current?.scrollLeft);
             position(positionIndex);
         }, 300);
     }
