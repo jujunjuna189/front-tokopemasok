@@ -13,7 +13,7 @@ export const loginRepo = async ({ body }) => {
 export const registerRepo = async ({ body }) => {
     try {
         const response = await axios.post(API_AUTH_REGISTER, body);
-        return response.data;
+        return response.data.data;
     } catch (error) {
         return false;
     }
