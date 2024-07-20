@@ -1,3 +1,4 @@
+import MobileAppsPage from "./mobile_apps"
 import CartPage from "./cart"
 import CartLocalPage from "./cart_local"
 import LoginPage from "./login"
@@ -8,6 +9,7 @@ import ProfilePage from "./profile"
 import RegisterPage from "./register"
 
 export {
+    MobileAppsPage,
     CartPage,
     CartLocalPage,
     OrderPage,

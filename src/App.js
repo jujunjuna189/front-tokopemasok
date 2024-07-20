@@ -7,12 +7,16 @@ import { OrderContextProvider } from "./contexts/order";
 import { OrderDetailContextProvider } from "./contexts/order_detail";
 import { ProfileContextProvider } from "./contexts/profile";
 import { RegisterContextProvider } from "./contexts/register";
-import { CartLocalPage, CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage } from "./pages";
+import { MobileAppsPage, CartLocalPage, CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage } from "./pages";
 import { RouteName } from "./router/RouteName";
 
 function App() {
   return (
     <Routes>
+      {/* Download App Path */}
+      <Route path={RouteName.MOBILE_APPS} element={
+        <MobileAppsPage />
+      } />
       <Route path={RouteName.MAIN} element={
         <MainContextProvider>
           <MainPage />

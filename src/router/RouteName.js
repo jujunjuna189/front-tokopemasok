@@ -1,4 +1,5 @@
 export const RouteName = {
+    MOBILE_APPS: '/mobile-apps',
     MAIN: '/',
     LOGIN: '/login',
     REGISTER: '/register',
