@@ -1,4 +1,4 @@
-const REACT_APP_API_URL = `${process.env.REACT_APP_ENV}`;
+const REACT_APP_API_URL = `${process.env.REACT_APP_ENV}/api/v1`;
 
 // Auth
 export const API_AUTH_LOGIN = `${REACT_APP_API_URL}/auth/login`;

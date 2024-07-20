@@ -51,7 +51,7 @@ const MainPage = () => {
                         <small>Dapatkan kemudahan yang berlimpah dengan menggunakan aplikasi Tokopemasok</small>
                     </div>
                     <div>
-                        <Button className="bg-cyan-700 text-white">Unduh</Button>
+                        <Button className="bg-cyan-700 text-white" onClick={() => navigation(RouteName.MOBILE_APPS)}>Unduh</Button>
                     </div>
                 </Card>
             </div>
