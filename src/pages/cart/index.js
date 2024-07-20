@@ -1,9 +1,10 @@
 import { ArrowBack, Button, Content, CounterButton, HelpAdmin, ScreenNoAuth } from "../../components";
 import { UseCartContext } from "../../contexts/cart";
 import { formatterDecimal } from "../../utils";
+import { ScreenNoCart } from "./component";
 
 const CartPage = () => {
-    const { navigation, element, user, cart, onAddCart, onAddOrder, onShowModalUserAddress } = UseCartContext();
+    const { navigation, loader, element, user, cart, onAddCart, onAddOrder, onShowModalUserAddress } = UseCartContext();
 
     if (user === null) {
         return (
@@ -15,8 +16,17 @@ const CartPage = () => {
                 <ScreenNoAuth />
             </Content>
         );
+    } else if (!loader && !cart.cart_product_model) {
+        return (
+            <Content navbar={false} footer={false} padding={false} element={element}>
+                <div className="py-3 pl-2 flex justify-between sticky top-0 bg-white z-10">
+                    <ArrowBack label={'Pesanan'} />
+                    <HelpAdmin />
+                </div>
+                <ScreenNoCart />
+            </Content>
+        );
     } else {
-
         return (
             <Content navbar={false} footer={false} padding={false} element={element}>
                 <div className="py-4 pl-2 flex justify-between sticky top-0 bg-white">

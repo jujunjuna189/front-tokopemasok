@@ -25,7 +25,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                     <div className="mt-4">
-                        <div className="border rounded-lg py-2 px-3 flex justify-between items-center cursor-pointer">
+                        {/* <div className="border rounded-lg py-2 px-3 flex justify-between items-center cursor-pointer">
                             <div className="flex gap-2 items-center">
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13.252 20.601c-.408 .155 -.826 .288 -1.252 .399a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.19 7.357" /><path d="M22 22l-5 -5" /><path d="M17 22l5 -5" /></svg>
@@ -35,7 +35,7 @@ const ProfilePage = () => {
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg>
                             </span>
-                        </div>
+                        </div> */}
                         <div className="border rounded-lg py-2 px-3 flex justify-between items-center mt-1 cursor-pointer" onClick={() => onLogout()}>
                             <div className="flex gap-2 items-center">
                                 <span>

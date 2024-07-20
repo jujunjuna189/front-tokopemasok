@@ -10,11 +10,14 @@ const CartContext = createContext();
 export const CartContextProvider = ({ children }) => {
     const navigation = useNavigate();
     const user = getLocalUser();
+    const [loader, setLoader] = useState(false);
     const [element, setElement] = useState(<></>);
     const [cart, setCart] = useState({});
 
     const onGetCart = async () => {
+        setLoader(true);
         await getCartRepo({ filter: 'filter[status]=active', include: "include=cartProductModel" }).then((res) => {
+            setLoader(false);
             setCart(res);
         });
     }
@@ -79,7 +82,7 @@ export const CartContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <CartContext.Provider value={{ navigation, element, user, cart, onAddCart, onAddOrder, onShowModalUserAddress }}>
+        <CartContext.Provider value={{ navigation, loader, element, user, cart, onAddCart, onAddOrder, onShowModalUserAddress }}>
             {children}
         </CartContext.Provider>
     );
