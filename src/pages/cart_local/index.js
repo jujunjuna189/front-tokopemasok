@@ -50,7 +50,7 @@ const CartLocalPage = () => {
                         return (
                             <div className="border rounded-lg mt-1 py-2 px-2 flex items-end justify-between" key={index}>
                                 <div className="flex gap-2 items-center overflow-hidden">
-                                    <div className="border rounded-lg w-16 h-16">
+                                    <div className="border rounded-lg w-16 h-16 overflow-hidden">
                                         <img src={item?.image} alt={item?.title} className="w-full h-full" />
                                     </div>
                                     <div className="flex flex-col">
