@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { AssetBannerFreeOngkir, AssetBannerKemanaAja, AssetBannerPaketProduk, AssetBannerWelcome } from "../../assets";
-import { addCartRepo, getCartRepo, getProductRepo } from "../../repo";
+import { addCartRepo, getCartRepo, getProductRepo, getStoreRepo } from "../../repo";
 import { getLocalCart, getLocalUser, setLocalCart } from "../../utils";
 
 const MainContext = createContext();
@@ -49,7 +49,14 @@ export const MainContextProvider = ({ children }) => {
         },
     ];
 
+    const [store, setStore] = useState([]);
     const [list, setList] = useState([]);
+
+    const onGetStore = async () => {
+        await getStoreRepo({}).then((res) => {
+            setStore(res);
+        });
+    }
 
     const onGetProduct = async () => {
         await getProductRepo({ include: 'include=price' }).then((res) => {
@@ -91,13 +98,14 @@ export const MainContextProvider = ({ children }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        onGetStore();
         onGetProduct();
         user !== null && onGetCart();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <MainContext.Provider value={{ navigation, user, carousel, carouselText, list, localCart, cart, onAddCart, onAddCartLocal }}>
+        <MainContext.Provider value={{ navigation, user, carousel, carouselText, store, list, localCart, cart, onAddCart, onAddCartLocal }}>
             {children}
         </MainContext.Provider>
     );

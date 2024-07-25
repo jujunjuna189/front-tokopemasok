@@ -5,6 +5,8 @@ export const API_AUTH_LOGIN = `${REACT_APP_API_URL}/auth/login`;
 export const API_AUTH_REGISTER = `${REACT_APP_API_URL}/auth/register`;
 // User Address
 export const API_USER_ADDRESS = `${REACT_APP_API_URL}/user-address`;
+// Store
+export const API_STORE = `${REACT_APP_API_URL}/store`;
 // Product
 export const API_PRODUCT = `${REACT_APP_API_URL}/product`;
 // Cart

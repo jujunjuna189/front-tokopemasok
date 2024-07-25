@@ -5,7 +5,7 @@ import { RouteName } from "../../router/RouteName";
 import { formatterCurrency } from "../../utils";
 
 const MainPage = () => {
-    const { navigation, user, carousel, carouselText, list, localCart, cart, onAddCart, onAddCartLocal } = UseMainContext();
+    const { navigation, user, carousel, carouselText, store, list, localCart, cart, onAddCart, onAddCartLocal } = UseMainContext();
 
     return (
         <Content padding={false}>
@@ -54,6 +54,30 @@ const MainPage = () => {
                         <Button className="bg-cyan-700 text-white" onClick={() => navigation(RouteName.MOBILE_APPS)}>Unduh</Button>
                     </div>
                 </Card>
+            </div>
+            {/* List Store */}
+            <div className="mt-4 mb-8">
+                <div className="px-2">
+                    <h1 className="text-sm font-bold">Distributor Baru</h1>
+                </div>
+                <div className="mt-2 px-2">
+                    <div className="flex gap-2 scrollbar-hidden">
+                        {store.map((item, index) => {
+                            return (
+                                <div key={index} className="flex flex-col w-12 h-12">
+                                    <div className="flex justify-center">
+                                        <div className="rounded-full border">
+                                            <img src={item.image} alt={item.name} className="w-full h-full" />
+                                        </div>
+                                    </div>
+                                    <div className="text-[7px] text-center font-medium mt-1">
+                                        {item.name.slice(0, 11) + '...'}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
             {/* List Product */}
             <div className="mt-4 mb-20">
