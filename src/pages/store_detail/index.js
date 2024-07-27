@@ -1,86 +1,32 @@
-import { IcReward } from "../../assets";
-import { Button, Card, Content, InputSearch, SimpleCarousel, VerticalCarousel } from "../../components";
-import { UseMainContext } from "../../contexts/main";
+import { Button, Card, Content } from "../../components"
+import { UseStoreDetailContext } from "../../contexts/store_detail";
 import { RouteName } from "../../router/RouteName";
 import { formatterCurrency } from "../../utils";
 
-const MainPage = () => {
-    const { navigation, user, carousel, carouselText, store, list, localCart, cart, onAddCart, onAddCartLocal } = UseMainContext();
+const StoreDetailPage = () => {
+    const { navigation, user, store, list, localCart, cart, onAddCart, onAddCartLocal } = UseStoreDetailContext();
 
     return (
-        <Content padding={false}>
-            <div className="mt-3">
-                <SimpleCarousel>
-                    {carousel.map((item, index) => {
-                        return (
-                            <div key={index} className="h-24 min-w-[85%] w-[85%] max-w-[85%] rounded-lg overflow-hidden flex justify-center items-center">
-                                <img src={item.path} alt={item.title} className="h-full w-full" />
-                            </div>
-                        );
-                    })}
-                </SimpleCarousel>
-            </div>
-            <div className="px-2 pt-4"><InputSearch placeholder="Cari Produk..." /></div>
-            <div className="px-2 pt-4">
-                <Card className="p-3">
-                    <div className="flex items-center gap-3">
-                        <div className="h-12 w-12 rounded-md bg-slate-200 pt-1 flex justify-center items-center overflow-hidden">
-                            <img src={IcReward} alt="IconReward" className="h-full" />
-                        </div>
-                        <VerticalCarousel className="h-8">
-                            {carouselText.map((item, index) => {
-                                return (
-                                    <div key={index} className="leading-3">
-                                        <h4 className="font-bold text-sm text-orange-600">{item.title}</h4>
-                                        <span>{item.subTitle}</span>
-                                    </div>
-                                );
-                            })}
-                        </VerticalCarousel>
+        <Content navbar={false} padding={false}>
+            {/* Detail Store */}
+            <div className="flex justify-between items-center px-2 py-4">
+                <div className="flex gap-3 items-center">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border">
+                        <img src={store.image} alt={store.name} className="w-full h-full" />
                     </div>
-                    <div className="flex justify-between items-center mt-2">
-                        <span className="font-medium text-sm">Tentang Tokopemasok</span>
-                        <Button className="border border-cyan-700 text-cyan-700">Telusuri</Button>
-                    </div>
-                </Card>
-            </div>
-            <div className="px-2 pt-2">
-                <Card className="p-3 flex justify-between items-end">
                     <div className="flex flex-col">
-                        <span className="font-semibold">Download Aplikasi Tokopemasok</span>
-                        <small>Dapatkan kemudahan yang berlimpah dengan menggunakan aplikasi Tokopemasok</small>
-                    </div>
-                    <div>
-                        <Button className="bg-cyan-700 text-white" onClick={() => navigation(RouteName.MOBILE_APPS)}>Unduh</Button>
-                    </div>
-                </Card>
-            </div>
-            {/* List Store */}
-            {store.length > 1 && (
-                <div className="mt-4 mb-8">
-                    <div className="px-2">
-                        <h1 className="text-sm font-bold">Distributor Baru</h1>
-                    </div>
-                    <div className="mt-2 px-2">
-                        <div className="flex gap-2 scrollbar-hidden">
-                            {store.map((item, index) => {
-                                return (
-                                    <div key={index} className="flex flex-col w-12 h-12 cursor-pointer" onClick={() => navigation(`${RouteName.MAIN}${item.domain}`)}>
-                                        <div className="flex justify-center">
-                                            <div className="rounded-full border overflow-hidden">
-                                                <img src={item.image} alt={item.name} className="w-full h-full" />
-                                            </div>
-                                        </div>
-                                        <div className="text-[7px] text-center font-medium mt-1">
-                                            {item.name.slice(0, 11) + '...'}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        <span className="font-bold">{store.name}</span>
+                        <span className="text-[9px]">@{store.domain}</span>
                     </div>
                 </div>
-            )}
+                <div>
+                    <Button className="text-cyan-700 text-[10px]" onClick={() => navigator.clipboard.writeText(`${window.location.origin}${RouteName.MAIN}${store.domain}`)}>
+                        Bagikan
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M13 4v4c-6.575 1.028 -9.02 6.788 -10 12c-.037 .206 5.384 -5.962 10 -6v4l8 -7l-8 -7z" /></svg>
+                    </Button>
+                </div>
+            </div>
+            <hr />
             {/* List Product */}
             <div className="mt-4 mb-20">
                 <div className="px-2">
@@ -150,4 +96,4 @@ const MainPage = () => {
     );
 }
 
-export default MainPage;
+export default StoreDetailPage;

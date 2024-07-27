@@ -7,6 +7,7 @@ import OrderPage from "./order"
 import OrderDetailPage from "./order_detail"
 import ProfilePage from "./profile"
 import RegisterPage from "./register"
+import StoreDetailPage from "./store_detail"
 
 export {
     MobileAppsPage,
@@ -18,4 +19,5 @@ export {
     ProfilePage,
     RegisterPage,
     MainPage,
+    StoreDetailPage,
 }

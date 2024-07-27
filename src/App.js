@@ -7,21 +7,13 @@ import { OrderContextProvider } from "./contexts/order";
 import { OrderDetailContextProvider } from "./contexts/order_detail";
 import { ProfileContextProvider } from "./contexts/profile";
 import { RegisterContextProvider } from "./contexts/register";
-import { MobileAppsPage, CartLocalPage, CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage } from "./pages";
+import { StoreDetailContextProvider } from "./contexts/store_detail";
+import { MobileAppsPage, CartLocalPage, CartPage, LoginPage, MainPage, OrderDetailPage, OrderPage, ProfilePage, RegisterPage, StoreDetailPage } from "./pages";
 import { RouteName } from "./router/RouteName";
 
 function App() {
   return (
     <Routes>
-      {/* Download App Path */}
-      <Route path={RouteName.MOBILE_APPS} element={
-        <MobileAppsPage />
-      } />
-      <Route path={RouteName.MAIN} element={
-        <MainContextProvider>
-          <MainPage />
-        </MainContextProvider>
-      } />
       <Route path={RouteName.LOGIN} element={
         <LoginContextProvider>
           <LoginPage />
@@ -31,6 +23,21 @@ function App() {
         <RegisterContextProvider>
           <RegisterPage />
         </RegisterContextProvider>
+      } />
+      {/* Download App Path */}
+      <Route path={RouteName.MOBILE_APPS} element={
+        <MobileAppsPage />
+      } />
+      <Route path={RouteName.MAIN} element={
+        <MainContextProvider>
+          <MainPage />
+        </MainContextProvider>
+      } />
+      {/* Store */}
+      <Route path={RouteName.MAIN + ':store_domain'} element={
+        <StoreDetailContextProvider>
+          <StoreDetailPage />
+        </StoreDetailContextProvider>
       } />
       <Route path={RouteName.CART} element={
         <CartContextProvider>
